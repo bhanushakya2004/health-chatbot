@@ -15,10 +15,25 @@ if %errorlevel% neq 0 (
 )
 
 echo.
+echo Setting up virtual environment...
+if not exist ".venv" (
+    echo Creating new virtual environment with UV...
+    uv venv
+    if %errorlevel% neq 0 (
+        echo ERROR: Failed to create virtual environment
+        echo Please install UV: pip install uv
+        pause
+        exit /b 1
+    )
+)
+
+echo.
 echo Installing/Updating dependencies...
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 if %errorlevel% neq 0 (
+    echo.
     echo ERROR: Failed to install dependencies
+    echo Try running: setup-backend-fresh.bat
     pause
     exit /b 1
 )
@@ -35,6 +50,6 @@ echo NOTE: Make sure MongoDB is running!
 echo Start MongoDB with: mongod
 echo.
 
-python -m uvicorn app.main:app --reload
+.venv\Scripts\python.exe -m uvicorn app.main:app --reload
 
 pause

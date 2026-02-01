@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { X, Upload, FileText, ImageIcon, Trash2, Calendar, User, Mail } from 'lucide-react';
+import { X, Upload, FileText, Trash2, RefreshCw, Loader2, CheckCircle, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,230 +19,402 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
-import { UserProfile, MedicalRecord } from '@/types/chat';
 import { toast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
+import { userService, UserProfile, DocumentResponse, HealthSummaryResponse } from '@/lib/user';
 
 interface ProfileModalProps {
   open: boolean;
   onClose: () => void;
-  user: UserProfile;
-  records: MedicalRecord[];
-  onUpdateUser: (user: UserProfile) => void;
-  onAddRecord: (record: MedicalRecord) => void;
-  onDeleteRecord: (id: string) => void;
 }
 
-export function ProfileModal({
-  open,
-  onClose,
-  user,
-  records,
-  onUpdateUser,
-  onAddRecord,
-  onDeleteRecord,
-}: ProfileModalProps) {
-  const [editedUser, setEditedUser] = useState(user);
-  const [newRecordName, setNewRecordName] = useState('');
-  const [newRecordDate, setNewRecordDate] = useState('');
+export function ProfileModal({ open, onClose }: ProfileModalProps) {
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const [documents, setDocuments] = useState<DocumentResponse[]>([]);
+  const [healthSummary, setHealthSummary] = useState<HealthSummaryResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  
+  // Form states
+  const [fullName, setFullName] = useState('');
+  const [age, setAge] = useState<number | ''>('');
+  const [gender, setGender] = useState('');
 
-  const handleSaveProfile = () => {
-    onUpdateUser(editedUser);
-    toast({
-      title: 'Profile updated',
-      description: 'Your profile has been saved successfully.',
-    });
-  };
+  useEffect(() => {
+    if (open) {
+      loadUserData();
+    }
+  }, [open]);
 
-  const handleFileUpload = () => {
-    if (!newRecordName || !newRecordDate) {
+  const loadUserData = async () => {
+    setLoading(true);
+    try {
+      const [userData, docs, summary] = await Promise.all([
+        userService.getCurrentUser(),
+        userService.getDocuments(),
+        userService.getHealthSummary().catch(() => null),
+      ]);
+
+      if (userData) {
+        setUser(userData);
+        setFullName(userData.full_name || '');
+        setAge(userData.age || '');
+        setGender(userData.gender || '');
+      }
+      setDocuments(docs);
+      setHealthSummary(summary);
+    } catch (error) {
       toast({
-        title: 'Missing information',
-        description: 'Please provide both a name and date for the record.',
+        title: 'Error',
+        description: 'Failed to load profile data',
         variant: 'destructive',
       });
-      return;
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const newRecord: MedicalRecord = {
-      id: Date.now().toString(),
-      name: newRecordName,
-      date: new Date(newRecordDate),
-      fileType: 'pdf',
-      size: '125 KB',
-    };
+  const handleSaveProfile = async () => {
+    setLoading(true);
+    try {
+      const updated = await userService.updateCurrentUser({
+        full_name: fullName,
+        age: age === '' ? undefined : Number(age),
+        gender: gender || undefined,
+      });
+      setUser(updated);
+      toast({
+        title: 'Profile updated',
+        description: 'Your profile has been saved successfully.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to update profile',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    onAddRecord(newRecord);
-    setNewRecordName('');
-    setNewRecordDate('');
-    toast({
-      title: 'Record uploaded',
-      description: 'Your medical record has been added successfully.',
-    });
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    setUploading(true);
+    try {
+      const doc = await userService.uploadDocument(formData);
+      setDocuments([...documents, doc]);
+      toast({
+        title: 'Document uploaded',
+        description: 'Your document is being processed for OCR extraction.',
+      });
+      event.target.value = '';
+    } catch (error) {
+      toast({
+        title: 'Upload failed',
+        description: 'Failed to upload document',
+        variant: 'destructive',
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDeleteDocument = async (docId: string) => {
+    try {
+      await userService.deleteDocument(docId);
+      setDocuments(documents.filter(d => d.document_id !== docId));
+      toast({
+        title: 'Document deleted',
+        description: 'Document has been removed successfully.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Delete failed',
+        description: 'Failed to delete document',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleGenerateHealthSummary = async () => {
+    setGenerating(true);
+    try {
+      const summary = await userService.generateHealthSummary();
+      setHealthSummary(summary);
+      toast({
+        title: 'Health summary generated',
+        description: 'Your AI health summary has been updated.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Generation failed',
+        description: 'Failed to generate health summary',
+        variant: 'destructive',
+      });
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[600px] max-h-[85vh] overflow-hidden flex flex-col">
+      <DialogContent className="sm:max-w-[700px] max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">Patient Profile</DialogTitle>
+          <DialogTitle className="text-xl font-semibold">My Profile</DialogTitle>
         </DialogHeader>
 
-        <Tabs defaultValue="profile" className="flex-1 overflow-hidden flex flex-col">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="records">Medical Records</TabsTrigger>
-          </TabsList>
+        {loading && !user ? (
+          <div className="flex justify-center items-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : (
+          <Tabs defaultValue="profile" className="flex-1 overflow-hidden flex flex-col">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="profile">Profile</TabsTrigger>
+              <TabsTrigger value="documents">Documents</TabsTrigger>
+              <TabsTrigger value="health">Health Summary</TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="profile" className="flex-1 overflow-y-auto mt-4 space-y-6">
-            {/* Avatar Section */}
-            <div className="flex items-center gap-4">
-              <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center">
-                <User className="h-10 w-10 text-primary" />
-              </div>
-              <Button variant="outline" size="sm">
-                <Upload className="h-4 w-4 mr-2" />
-                Upload Photo
-              </Button>
-            </div>
-
-            <Separator />
-
-            {/* Profile Form */}
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  value={editedUser.name}
-                  onChange={(e) => setEditedUser({ ...editedUser, name: e.target.value })}
-                  placeholder="Enter your full name"
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={editedUser.email}
-                  onChange={(e) => setEditedUser({ ...editedUser, email: e.target.value })}
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="age">Age</Label>
+            {/* Profile Tab */}
+            <TabsContent value="profile" className="flex-1 overflow-y-auto mt-4 space-y-4">
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="email">Email</Label>
                   <Input
-                    id="age"
-                    type="number"
-                    value={editedUser.age}
-                    onChange={(e) => setEditedUser({ ...editedUser, age: parseInt(e.target.value) || 0 })}
-                    placeholder="Age"
+                    id="email"
+                    value={user?.email || ''}
+                    disabled
+                    className="bg-gray-50"
                   />
                 </div>
 
-                <div className="grid gap-2">
-                  <Label htmlFor="gender">Gender</Label>
-                  <Select
-                    value={editedUser.gender}
-                    onValueChange={(value: 'male' | 'female' | 'other') =>
-                      setEditedUser({ ...editedUser, gender: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <Button onClick={handleSaveProfile} className="mt-2">
-                Save Profile
-              </Button>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="records" className="flex-1 overflow-y-auto mt-4 space-y-6">
-            {/* Upload New Record */}
-            <div className="rounded-xl border border-dashed border-border p-4 space-y-4">
-              <h3 className="font-medium">Upload New Record</h3>
-              <div className="grid gap-3">
-                <Input
-                  placeholder="Report name (e.g., Blood Test Results)"
-                  value={newRecordName}
-                  onChange={(e) => setNewRecordName(e.target.value)}
-                />
-                <div className="flex gap-2">
+                <div>
+                  <Label htmlFor="fullName">Full Name</Label>
                   <Input
-                    type="date"
-                    value={newRecordDate}
-                    onChange={(e) => setNewRecordDate(e.target.value)}
-                    className="flex-1"
+                    id="fullName"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="Enter your full name"
                   />
-                  <Button onClick={handleFileUpload}>
-                    <Upload className="h-4 w-4 mr-2" />
-                    Upload
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="age">Age</Label>
+                    <Input
+                      id="age"
+                      type="number"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value === '' ? '' : Number(e.target.value))}
+                      placeholder="Your age"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="gender">Gender</Label>
+                    <Select value={gender} onValueChange={setGender}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Male">Male</SelectItem>
+                        <SelectItem value="Female">Female</SelectItem>
+                        <SelectItem value="Other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="flex justify-end">
+                  <Button onClick={handleSaveProfile} disabled={loading}>
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      'Save Profile'
+                    )}
                   </Button>
                 </div>
               </div>
-            </div>
+            </TabsContent>
 
-            <Separator />
-
-            {/* Records List */}
-            <div className="space-y-3">
-              <h3 className="font-medium">Your Records</h3>
-              {records.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
-                  <FileText className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                  <p>No medical records uploaded yet.</p>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  {records.map((record) => (
-                    <div
-                      key={record.id}
-                      className="flex items-center gap-3 rounded-lg border border-border p-3 hover:bg-muted/50 transition-smooth"
+            {/* Documents Tab */}
+            <TabsContent value="documents" className="flex-1 overflow-y-auto mt-4 space-y-4">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-medium">Medical Documents</h3>
+                  <div className="relative">
+                    <input
+                      type="file"
+                      id="file-upload"
+                      className="hidden"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      onChange={handleFileUpload}
+                      disabled={uploading}
+                    />
+                    <Button
+                      onClick={() => document.getElementById('file-upload')?.click()}
+                      disabled={uploading}
+                      size="sm"
                     >
-                      {record.fileType === 'pdf' ? (
-                        <FileText className="h-8 w-8 text-destructive shrink-0" />
+                      {uploading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Uploading...
+                        </>
                       ) : (
-                        <ImageIcon className="h-8 w-8 text-health-info shrink-0" />
+                        <>
+                          <Upload className="mr-2 h-4 w-4" />
+                          Upload
+                        </>
                       )}
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{record.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {format(record.date, 'MMM d, yyyy')} • {record.size}
-                        </p>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="shrink-0 hover:bg-destructive/20 hover:text-destructive"
-                        onClick={() => {
-                          onDeleteRecord(record.id);
-                          toast({
-                            title: 'Record deleted',
-                            description: 'The medical record has been removed.',
-                          });
-                        }}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ))}
+                    </Button>
+                  </div>
                 </div>
-              )}
-            </div>
-          </TabsContent>
-        </Tabs>
+
+                <Separator />
+
+                {documents.length === 0 ? (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <FileText className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                    <p>No documents uploaded yet</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {documents.map((doc) => (
+                      <div
+                        key={doc.document_id}
+                        className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50"
+                      >
+                        <div className="flex items-center gap-3 flex-1">
+                          <FileText className="h-5 w-5 text-primary" />
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">{doc.filename}</p>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <span>{formatFileSize(doc.file_size)}</span>
+                              <span>•</span>
+                              <span>{format(new Date(doc.uploaded_at), 'MMM d, yyyy')}</span>
+                              {doc.processed ? (
+                                <>
+                                  <span>•</span>
+                                  <CheckCircle className="h-3 w-3 text-green-600" />
+                                  <span className="text-green-600">Processed</span>
+                                </>
+                              ) : (
+                                <>
+                                  <span>•</span>
+                                  <Clock className="h-3 w-3 text-amber-600" />
+                                  <span className="text-amber-600">Processing...</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteDocument(doc.document_id)}
+                        >
+                          <Trash2 className="h-4 w-4 text-red-600" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+
+            {/* Health Summary Tab */}
+            <TabsContent value="health" className="flex-1 overflow-y-auto mt-4 space-y-4">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-medium">AI Health Summary</h3>
+                  <Button
+                    onClick={handleGenerateHealthSummary}
+                    disabled={generating}
+                    size="sm"
+                  >
+                    {generating ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        Regenerate
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <Separator />
+
+                {healthSummary ? (
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium mb-2">Summary</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {healthSummary.summary}
+                      </p>
+                    </div>
+
+                    {healthSummary.medical_conditions.length > 0 && (
+                      <div>
+                        <h4 className="font-medium mb-2">Medical Conditions</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {healthSummary.medical_conditions.map((condition, idx) => (
+                            <span
+                              key={idx}
+                              className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                            >
+                              {condition}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="text-xs text-muted-foreground">
+                      Last updated: {format(new Date(healthSummary.last_updated), 'PPpp')}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-muted-foreground">
+                    <RefreshCw className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                    <p className="mb-4">No health summary generated yet</p>
+                    <Button onClick={handleGenerateHealthSummary} disabled={generating}>
+                      {generating ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Generating...
+                        </>
+                      ) : (
+                        'Generate Health Summary'
+                      )}
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+          </Tabs>
+        )}
       </DialogContent>
     </Dialog>
   );

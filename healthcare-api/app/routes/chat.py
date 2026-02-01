@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi.responses import StreamingResponse
 from typing import List
 from app.dependencies import get_current_user
 from app.models.user import UserResponse
@@ -14,6 +15,7 @@ from app.config.database import get_chats_collection
 from app.services.agent_service import HealthcareAgentService
 from datetime import datetime
 import uuid
+import json
 
 router = APIRouter(prefix="/chats", tags=["Chat"])
 
@@ -65,23 +67,30 @@ async def create_chat(
     Create a new chat.
     """
     chats_collection = get_chats_collection()
+    chat_id = f"C{uuid.uuid4().hex[:8].upper()}"
+    
     user_message = Message(
         id=f"M{uuid.uuid4().hex[:8].upper()}",
         role="user",
         content=chat_create.message,
         timestamp=datetime.now(),
     )
+    
     assistant_response_content = HealthcareAgentService.get_response(
-        chat_create.message
+        query=chat_create.message,
+        session_id=chat_id,
+        user_id=current_user["user_id"]
     )
+    
     assistant_message = Message(
         id=f"M{uuid.uuid4().hex[:8].upper()}",
         role="assistant",
         content=assistant_response_content,
         timestamp=datetime.now(),
     )
+    
     chat = Chat(
-        id=f"C{uuid.uuid4().hex[:8].upper()}",
+        id=chat_id,
         user_id=current_user["user_id"],
         title=chat_create.title,
         messages=[user_message, assistant_message],
@@ -99,7 +108,7 @@ async def add_message_to_chat(
     current_user: UserResponse = Depends(get_current_user),
 ):
     """
-    Add a new message to an existing chat.
+    Add a new message to an existing chat (non-streaming).
     """
     chats_collection = get_chats_collection()
     chat = chats_collection.find_one(
@@ -109,19 +118,27 @@ async def add_message_to_chat(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Chat not found"
         )
+    
     user_message = Message(
         id=f"M{uuid.uuid4().hex[:8].upper()}",
         role="user",
         content=message_request.content,
         timestamp=datetime.now(),
     )
-    assistant_response_content = HealthcareAgentService.get_response(message_request.content)
+    
+    assistant_response_content = HealthcareAgentService.get_response(
+        query=message_request.content,
+        session_id=chat_id,
+        user_id=current_user["user_id"]
+    )
+    
     assistant_message = Message(
         id=f"M{uuid.uuid4().hex[:8].upper()}",
         role="assistant",
         content=assistant_response_content,
         timestamp=datetime.now(),
     )
+    
     chats_collection.update_one(
         {"id": chat_id},
         {
@@ -130,6 +147,93 @@ async def add_message_to_chat(
         },
     )
     return assistant_message
+
+
+@router.post("/{chat_id}/stream")
+async def stream_chat_message(
+    chat_id: str,
+    message_request: ChatMessageRequest,
+    current_user: UserResponse = Depends(get_current_user),
+):
+    """
+    Add a message and stream the assistant's response using Server-Sent Events.
+    """
+    chats_collection = get_chats_collection()
+    chat = chats_collection.find_one(
+        {"id": chat_id, "user_id": current_user["user_id"]}
+    )
+    if not chat:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Chat not found"
+        )
+    
+    user_message = Message(
+        id=f"M{uuid.uuid4().hex[:8].upper()}",
+        role="user",
+        content=message_request.content,
+        timestamp=datetime.now(),
+    )
+    
+    # Save user message immediately
+    chats_collection.update_one(
+        {"id": chat_id},
+        {
+            "$push": {"messages": user_message.model_dump()},
+            "$set": {"updated_at": datetime.now()},
+        },
+    )
+    
+    async def generate_stream():
+        full_content = ""
+        assistant_message_id = f"M{uuid.uuid4().hex[:8].upper()}"
+        
+        try:
+            # Stream response from agent
+            stream = HealthcareAgentService.get_response_stream(
+                query=message_request.content,
+                session_id=chat_id,
+                user_id=current_user["user_id"]
+            )
+            
+            for chunk in stream:
+                if hasattr(chunk, 'content') and chunk.content:
+                    content = chunk.content
+                    full_content += content
+                    
+                    # Send SSE formatted data
+                    yield f"data: {json.dumps({'content': content, 'done': False})}\n\n"
+            
+            # Save complete assistant message to database
+            assistant_message = Message(
+                id=assistant_message_id,
+                role="assistant",
+                content=full_content,
+                timestamp=datetime.now(),
+            )
+            
+            chats_collection.update_one(
+                {"id": chat_id},
+                {
+                    "$push": {"messages": assistant_message.model_dump()},
+                    "$set": {"updated_at": datetime.now()},
+                },
+            )
+            
+            # Send completion signal
+            yield f"data: {json.dumps({'content': '', 'done': True, 'message_id': assistant_message_id})}\n\n"
+            
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e), 'done': True})}\n\n"
+    
+    return StreamingResponse(
+        generate_stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no"
+        }
+    )
 
 
 @router.delete("/{chat_id}", status_code=status.HTTP_204_NO_CONTENT)

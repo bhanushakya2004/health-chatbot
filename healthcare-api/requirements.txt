@@ -1,10 +1,29 @@
+# Core Framework
 fastapi==0.109.0
 uvicorn==0.27.0
-pydantic==2.5.3
+pydantic>=2.5.3
+pydantic[email]>=2.5.3
 pymongo==4.6.1
 python-multipart==0.0.6
 python-dotenv==1.0.0
-agno==0.0.25
-bcrypt==3.2.0
-passlib[bcrypt]==1.7.4
-python-jose[cryptography]==3.3.0
+
+# AI & ML
+agno>=2.4.0
+chromadb>=0.4.22
+
+# Authentication & Security
+bcrypt>=4.0.1,<5.0.0
+passlib[bcrypt]>=1.7.4
+python-jose[cryptography]>=3.3.0
+
+# OCR & Document Processing
+pytesseract>=0.3.10
+Pillow>=10.2.0
+pdf2image>=1.17.0
+PyPDF2>=3.0.0
+
+# Logging & Monitoring
+python-json-logger>=2.0.7
+colorlog>=6.8.2
+google-genai
+ddgs

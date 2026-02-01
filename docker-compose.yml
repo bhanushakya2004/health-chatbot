@@ -1,33 +1,88 @@
 version: '3.8'
 
 services:
+  # MongoDB database
+  mongo:
+    image: mongo:7.0
+    container_name: healthcare-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=healthcare_db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/healthcare_db --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - healthcare-network
+
+  # Backend API
   backend:
-    build: ./healthcare-api
+    build: 
+      context: ./healthcare-api
+      dockerfile: Dockerfile
+    container_name: healthcare-backend
+    restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
       - MONGODB_URL=mongodb://mongo:27017
       - DATABASE_NAME=healthcare_db
-      - SECRET_KEY=your-secret-key-here-change-in-production
+      - SECRET_KEY=${SECRET_KEY:-change-this-secret-key-in-production}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+    volumes:
+      - backend-logs:/app/logs
+      - backend-uploads:/app/uploads
+      - chromadb-data:/app/data/chromadb
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
+  # Frontend
   frontend:
-    build: ./medicare-chat
+    build: 
+      context: ./medicare-chat
+      dockerfile: Dockerfile
+    container_name: healthcare-frontend
+    restart: unless-stopped
     ports:
-      - "5173:80"
+      - "80:80"
     environment:
       - VITE_API_BASE_URL=http://localhost:8000
     depends_on:
       - backend
-
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
 
 volumes:
   mongo-data:
+    driver: local
+  backend-logs:
+    driver: local
+  backend-uploads:
+    driver: local
+  chromadb-data:
+    driver: local
+
+networks:
+  healthcare-network:
+    driver: bridge

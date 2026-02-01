@@ -1,17 +1,28 @@
 [project]
 name = "healthcare-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "Healthcare Chatbot API with AI agents, OCR, and smart logging"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "agno>=2.4.7",
     "fastapi==0.109.0",
-    "passlib[bcrypt]>=1.7.4",
-    "pydantic==2.5.3",
-    "pymongo==4.6.1",
-    "python-dotenv==1.0.0",
-    "python-jose>=3.5.0",
-    "python-multipart==0.0.6",
     "uvicorn==0.27.0",
+    "pydantic[email]>=2.5.3",
+    "pymongo==4.6.1",
+    "python-multipart==0.0.6",
+    "python-dotenv==1.0.0",
+    "agno>=2.4.0",
+    "chromadb>=0.4.22",
+    "bcrypt>=4.0.1,<5.0.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.3.0",
+    "pytesseract>=0.3.10",
+    "pillow>=10.2.0",
+    "pdf2image>=1.17.0",
+    "pypdf2>=3.0.0",
+    "python-json-logger>=2.0.7",
+    "colorlog>=6.8.2",
+    "google-genai>=1.61.0",
+    "ddgs>=9.10.0",
+    "openai>=2.16.0",
 ]

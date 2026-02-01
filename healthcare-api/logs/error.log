@@ -1,0 +1,524 @@
+2026-01-31 17:05:46 | ERROR    | healthcare_api | error:152 | Request failed: POST /chats/
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\anyio\streams\memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\utils\logging_middleware.py", line 32, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\routes\chat.py", line 79, in create_chat
+    assistant_response_content = HealthcareAgentService.get_response(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 89, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 23, in get_agent
+    db = MongoDb(
+         ^^^^^^^^
+TypeError: MongoDb.__init__() got an unexpected keyword argument 'database'
+2026-01-31 17:05:48 | ERROR    | healthcare_api | error:152 | Request failed: POST /chats/
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\anyio\streams\memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\utils\logging_middleware.py", line 32, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\routes\chat.py", line 79, in create_chat
+    assistant_response_content = HealthcareAgentService.get_response(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 89, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 23, in get_agent
+    db = MongoDb(
+         ^^^^^^^^
+TypeError: MongoDb.__init__() got an unexpected keyword argument 'database'
+2026-01-31 17:05:50 | ERROR    | healthcare_api | error:152 | Request failed: POST /chats/
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\anyio\streams\memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\utils\logging_middleware.py", line 32, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\routes\chat.py", line 79, in create_chat
+    assistant_response_content = HealthcareAgentService.get_response(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 89, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 23, in get_agent
+    db = MongoDb(
+         ^^^^^^^^
+TypeError: MongoDb.__init__() got an unexpected keyword argument 'database'
+2026-01-31 17:07:32 | ERROR    | healthcare_api | error:152 | Request failed: POST /chats/
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\anyio\streams\memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\utils\logging_middleware.py", line 32, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\routes\chat.py", line 79, in create_chat
+    assistant_response_content = HealthcareAgentService.get_response(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 89, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 29, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'agent_id'
+2026-01-31 17:07:33 | ERROR    | healthcare_api | error:152 | Request failed: POST /chats/
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\anyio\streams\memory.py", line 132, in receive
+    raise EndOfStream from None
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\utils\logging_middleware.py", line 32, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 762, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 782, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 297, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 77, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\starlette\routing.py", line 72, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 299, in app
+    raise e
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 294, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\routes\chat.py", line 79, in create_chat
+    assistant_response_content = HealthcareAgentService.get_response(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 89, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 29, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'agent_id'
+2026-01-31 17:31:28 | ERROR    | healthcare_api | error:152 | Error extracting text from PDF: Unable to get page count. Is poppler installed and in PATH?
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\pdf2image\pdf2image.py", line 581, in pdfinfo_from_path
+    proc = Popen(command, env=env, stdout=PIPE, stderr=PIPE)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\AppData\Roaming\uv\python\cpython-3.11.13-windows-x86_64-none\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\bhanu\AppData\Roaming\uv\python\cpython-3.11.13-windows-x86_64-none\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\ocr_service.py", line 30, in extract_text_from_pdf
+    images = pdf2image.convert_from_path(pdf_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\pdf2image\pdf2image.py", line 127, in convert_from_path
+    page_count = pdfinfo_from_path(
+                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\.venv\Lib\site-packages\pdf2image\pdf2image.py", line 607, in pdfinfo_from_path
+    raise PDFInfoNotInstalledError(
+pdf2image.exceptions.PDFInfoNotInstalledError: Unable to get page count. Is poppler installed and in PATH?
+2026-01-31 17:50:31 | ERROR    | healthcare_api | error:152 | pdf2image failed (poppler may not be installed): Unable to get page count. Is poppler installed and in PATH?
+2026-02-01 08:44:17 | ERROR    | healthcare_api | error:152 | HTTP 404: Not Found
+2026-02-01 08:49:41 | ERROR    | healthcare_api | error:152 | HTTP 404: Not Found
+2026-02-01 08:49:48 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: name 'DeepSeek' is not defined
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 37, in get_agent
+    model=DeepSeek(id="deepseek-chat", api_key=api_key),
+          ^^^^^^^^
+NameError: name 'DeepSeek' is not defined
+2026-02-01 08:49:48 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 37, in get_agent
+    model=DeepSeek(id="deepseek-chat", api_key=api_key),
+          ^^^^^^^^
+NameError: name 'DeepSeek' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 207, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 59, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:49:48 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:50:33 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:50:33 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:50:33 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:53:30 | ERROR    | healthcare_api | error:152 | HTTP 401: Could not validate credentials
+2026-02-01 08:53:30 | ERROR    | healthcare_api | error:152 | HTTP 401: Could not validate credentials
+2026-02-01 08:53:30 | ERROR    | healthcare_api | error:152 | HTTP 404: Not Found
+2026-02-01 08:53:36 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:53:36 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:53:36 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:53:42 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:53:42 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:53:42 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:53:54 | ERROR    | healthcare_api | error:152 | HTTP 404: Not Found
+2026-02-01 08:54:00 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:54:00 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:54:00 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:56:02 | ERROR    | healthcare_api | error:152 | HTTP 404: Not Found
+2026-02-01 08:56:12 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:56:12 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    tool_limiter.increment_call(session_id)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:56:12 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:56:24 | ERROR    | healthcare_api | error:152 | HTTP 404: Not Found
+2026-02-01 08:56:29 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:56:29 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    tool_limiter.increment_call(session_id)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:56:29 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response
+2026-02-01 08:56:52 | ERROR    | healthcare_api | error:152 | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:56:52 | ERROR    | healthcare_api | error:152 | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    tool_limiter.increment_call(session_id)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:56:52 | ERROR    | healthcare_api | error:152 | AppException: Failed to generate response

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 class UserBase(BaseModel):
@@ -15,6 +15,11 @@ class UserInDB(UserBase):
 class UserResponse(UserBase):
     user_id: str
     created_at: datetime
+    age: Optional[int] = None
+    gender: Optional[str] = None
+    health_summary: Optional[str] = None
+    medical_conditions: Optional[List[str]] = None
+    last_summary_update: Optional[datetime] = None
 
 class Token(BaseModel):
     access_token: str
@@ -25,3 +30,5 @@ class TokenData(BaseModel):
 
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
+    age: Optional[int] = None
+    gender: Optional[str] = None

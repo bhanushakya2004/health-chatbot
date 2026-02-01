@@ -5,64 +5,36 @@ export interface UserProfile {
   email: string;
   full_name: string;
   created_at: string;
+  age?: number;
+  gender?: string;
+  health_summary?: string;
+  medical_conditions?: string[];
+  last_summary_update?: string;
 }
 
 export interface UserUpdate {
   full_name?: string;
-}
-
-export interface Patient {
-  patient_id: string;
-  name: string;
-  age: number;
-  gender: string;
-  blood_group?: string;
-  height?: number;
-  weight?: number;
-  phone: string;
-  email?: string;
-  address?: string;
-  emergency_contact?: string;
-  health_info: {
-    allergies?: string[];
-    chronic_conditions?: string[];
-    current_medications?: string[];
-    previous_surgeries?: string[];
-    family_history?: string[];
-  };
-  created_by: string;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface PatientCreate {
-  name: string;
-  age: number;
-  gender: string;
-  phone: string;
-  email?: string;
-}
-
-export interface PatientUpdate {
-  name?: string;
   age?: number;
   gender?: string;
-  phone?: string;
-  email?: string;
 }
 
-export interface Document {
+export interface HealthSummaryResponse {
+  summary: string;
+  medical_conditions: string[];
+  last_updated: string;
+}
+
+export interface DocumentResponse {
   document_id: string;
-  patient_id: string;
-  document_type: string;
-  title: string;
-  file_name: string;
+  user_id: string;
+  filename: string;
+  file_type: string;
   file_size: number;
-  mime_type: string;
-  upload_date: string;
-  uploaded_by: string;
+  description?: string;
+  extracted_text?: string;
+  processed: boolean;
+  uploaded_at: string;
 }
-
 export const userService = {
   async getCurrentUser(): Promise<UserProfile | null> {
     try {
@@ -76,41 +48,25 @@ export const userService = {
     return apiClient.put<UserProfile>('/users/me', data);
   },
 
-  async getPatients(): Promise<Patient[]> {
+  async generateHealthSummary(): Promise<HealthSummaryResponse> {
+    return apiClient.post<HealthSummaryResponse>('/users/me/health-summary', {});
+  },
+
+  async getHealthSummary(): Promise<HealthSummaryResponse> {
+    return apiClient.get<HealthSummaryResponse>('/users/me/health-summary');
+  },
+
+  async getDocuments(): Promise<DocumentResponse[]> {
     try {
-      return await apiClient.get<Patient[]>('/patients/');
-    } catch (error) {
-      console.error('Failed to fetch patients:', error);
-      return [];
-    }
-  },
-
-  async createPatient(patientData: PatientCreate): Promise<Patient> {
-    return apiClient.post<Patient>('/patients/', patientData);
-  },
-
-  async updatePatient(patientId: string, patientData: PatientUpdate): Promise<Patient> {
-    return apiClient.put<Patient>(`/patients/${patientId}`, patientData);
-  },
-
-  async deletePatient(patientId: string): Promise<void> {
-    return apiClient.delete<void>(`/patients/${patientId}`);
-  },
-
-  async getDocuments(patientId?: string): Promise<Document[]> {
-    try {
-      if (patientId) {
-        return await apiClient.get<Document[]>(`/documents/patient/${patientId}`);
-      }
-      return [];
+      return await apiClient.get<DocumentResponse[]>('/documents/');
     } catch (error) {
       console.error('Failed to fetch documents:', error);
       return [];
     }
   },
 
-  async uploadDocument(formData: FormData): Promise<Document> {
-    return apiClient.postFormData<Document>('/documents/upload', formData);
+  async uploadDocument(formData: FormData): Promise<DocumentResponse> {
+    return apiClient.postFormData<DocumentResponse>('/documents/upload', formData);
   },
 
   async deleteDocument(documentId: string): Promise<void> {

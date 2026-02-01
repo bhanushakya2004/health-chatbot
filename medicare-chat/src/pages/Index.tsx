@@ -36,13 +36,34 @@ const Index = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
 
+  // Listen for auth:unauthorized events
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      setAuthOpen(true);
+      setActiveChat(null);
+      setChats([]);
+      setUser(null);
+      toast({
+        title: 'Session Expired',
+        description: 'Your session has expired. Please login again.',
+        variant: 'destructive',
+      });
+    };
+
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
+    return () => window.removeEventListener('auth:unauthorized', handleUnauthorized);
+  }, []);
+
   const loadChatHistory = useCallback(async () => {
     if (!isAuthenticated) return;
     try {
       const chatHistory = await chatService.getChatHistory();
       setChats(chatHistory);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load chat history:', error);
+      if (error.message?.includes('session has expired')) {
+        return; // Don't show toast, auth modal will handle
+      }
       toast({
         title: 'Error',
         description: 'Failed to load chat history.',

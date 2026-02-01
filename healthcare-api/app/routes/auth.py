@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from datetime import timedelta
+from datetime import timedelta, datetime
 from app.models.user import UserCreate, UserResponse, Token, UserUpdate
 from app.security import create_access_token, get_password_hash, verify_password
 from app.config.database import get_users_collection
 from app.dependencies import get_current_user
+from app.services.health_report_agent import HealthReportAgent
 import uuid
-from datetime import datetime
 
 router = APIRouter(tags=["Authentication"])
 
@@ -33,6 +33,11 @@ async def signup(user: UserCreate):
         "full_name": user.full_name,
         "hashed_password": get_password_hash(user.password),
         "created_at": datetime.now(),
+        "age": None,
+        "gender": None,
+        "health_summary": None,
+        "medical_conditions": [],
+        "last_summary_update": None
     }
     
     users_collection.insert_one(user_doc)
@@ -74,7 +79,7 @@ async def read_users_me(current_user: UserResponse = Depends(get_current_user)):
 @router.put("/users/me", response_model=UserResponse)
 async def update_user_me(user_update: UserUpdate, current_user: UserResponse = Depends(get_current_user)):
     """
-    Update current user.
+    Update current user profile.
     """
     users_collection = get_users_collection()
     
@@ -87,5 +92,62 @@ async def update_user_me(user_update: UserUpdate, current_user: UserResponse = D
         )
     
     updated_user = users_collection.find_one({"user_id": current_user["user_id"]})
+    updated_user.pop("_id", None)
+    updated_user.pop("hashed_password", None)
     
     return UserResponse(**updated_user)
+
+@router.post("/users/me/health-summary")
+async def generate_health_summary(current_user: UserResponse = Depends(get_current_user)):
+    """
+    Generate comprehensive health summary from user's chat history, documents, and reports.
+    """
+    try:
+        # Generate health summary using AI agent
+        result = HealthReportAgent.generate_health_summary(current_user["user_id"])
+        
+        # Update user document
+        users_collection = get_users_collection()
+        users_collection.update_one(
+            {"user_id": current_user["user_id"]},
+            {
+                "$set": {
+                    "health_summary": result["health_summary"],
+                    "medical_conditions": result["medical_conditions"],
+                    "last_summary_update": datetime.now()
+                }
+            }
+        )
+        
+        return {
+            "message": "Health summary generated successfully",
+            "health_summary": result["health_summary"],
+            "medical_conditions": result["medical_conditions"],
+            "updated_at": datetime.now()
+        }
+    
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error generating health summary: {str(e)}"
+        )
+
+@router.get("/users/me/health-summary")
+async def get_health_summary(current_user: UserResponse = Depends(get_current_user)):
+    """
+    Get user's current health summary.
+    """
+    users_collection = get_users_collection()
+    user = users_collection.find_one({"user_id": current_user["user_id"]})
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    return {
+        "health_summary": user.get("health_summary"),
+        "medical_conditions": user.get("medical_conditions", []),
+        "last_updated": user.get("last_summary_update")
+    }

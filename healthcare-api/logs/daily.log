@@ -1,0 +1,282 @@
+2026-02-01 08:20:54 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:21:08 | INFO     | healthcare_api | API Request: OPTIONS /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:21:08 | INFO     | healthcare_api | API Request: OPTIONS /users/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:21:08 | INFO     | healthcare_api | API Request: GET /users/me - Status: 401 - Duration: 0.02s
+2026-02-01 08:21:08 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 401 - Duration: 0.02s
+2026-02-01 08:21:08 | INFO     | healthcare_api | API Request: OPTIONS /documents/user/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:21:08 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:21:16 | INFO     | healthcare_api | API Request: POST /login - Status: 200 - Duration: 0.33s
+2026-02-01 08:21:16 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.03s
+2026-02-01 08:21:16 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.04s
+2026-02-01 08:21:16 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:21:45 | INFO     | healthcare_api | API Request: OPTIONS /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:21:45 | INFO     | healthcare_api | API Request: GET /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:21:49 | INFO     | healthcare_api | API Request: OPTIONS /chats/C6432BA91/messages - Status: 200 - Duration: 0.00s
+2026-02-01 08:21:53 | INFO     | healthcare_api | API Request: POST /chats/C6432BA91/messages - Status: 200 - Duration: 3.65s
+2026-02-01 08:26:17 | INFO     | healthcare_api | 🛑 Application shutdown - MongoDB connection closed
+2026-02-01 08:26:22 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:26:26 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:26:56 | INFO     | healthcare_api | API Request: POST /chats/C6432BA91/messages - Status: 200 - Duration: 2.81s
+2026-02-01 08:39:38 | INFO     | healthcare_api | API Request: OPTIONS /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:39:38 | INFO     | healthcare_api | API Request: OPTIONS /users/me - Status: 200 - Duration: 0.01s
+2026-02-01 08:39:38 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:39:38 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.01s
+2026-02-01 08:39:38 | INFO     | healthcare_api | API Request: OPTIONS /documents/user/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:39:38 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:39:57 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:39:57 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.01s
+2026-02-01 08:39:57 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:41:21 | INFO     | healthcare_api | 🛑 Application shutdown - MongoDB connection closed
+2026-02-01 08:41:27 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:41:31 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:42:01 | INFO     | healthcare_api | 🛑 Application shutdown - MongoDB connection closed
+2026-02-01 08:42:06 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:44:17 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.01s
+2026-02-01 08:44:17 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.02s
+2026-02-01 08:44:17 | ERROR    | healthcare_api | HTTP 404: Not Found
+2026-02-01 08:44:17 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:49:31 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:49:41 | INFO     | healthcare_api | API Request: OPTIONS /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:49:41 | INFO     | healthcare_api | API Request: OPTIONS /users/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:49:41 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.02s
+2026-02-01 08:49:41 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.02s
+2026-02-01 08:49:41 | INFO     | healthcare_api | API Request: OPTIONS /documents/user/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:49:41 | ERROR    | healthcare_api | HTTP 404: Not Found
+2026-02-01 08:49:41 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:49:44 | INFO     | healthcare_api | API Request: OPTIONS /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:49:44 | INFO     | healthcare_api | API Request: GET /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:49:47 | INFO     | healthcare_api | API Request: OPTIONS /chats/C6432BA91/messages - Status: 200 - Duration: 0.00s
+2026-02-01 08:49:48 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:49:48 | ERROR    | healthcare_api | Failed to initialize agent: name 'DeepSeek' is not defined
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 37, in get_agent
+    model=DeepSeek(id="deepseek-chat", api_key=api_key),
+          ^^^^^^^^
+NameError: name 'DeepSeek' is not defined
+2026-02-01 08:49:48 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 37, in get_agent
+    model=DeepSeek(id="deepseek-chat", api_key=api_key),
+          ^^^^^^^^
+NameError: name 'DeepSeek' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 207, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 59, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:49:48 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:49:48 | INFO     | healthcare_api | API Request: POST /chats/C6432BA91/messages - Status: 503 - Duration: 0.60s
+2026-02-01 08:50:20 | INFO     | healthcare_api | 🛑 Application shutdown - MongoDB connection closed
+2026-02-01 08:50:24 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:50:29 | INFO     | healthcare_api | API Request: OPTIONS /chats/CEEC9F5AC - Status: 200 - Duration: 0.00s
+2026-02-01 08:50:29 | INFO     | healthcare_api | API Request: GET /chats/CEEC9F5AC - Status: 200 - Duration: 0.02s
+2026-02-01 08:50:33 | INFO     | healthcare_api | API Request: OPTIONS /chats/CEEC9F5AC/messages - Status: 200 - Duration: 0.00s
+2026-02-01 08:50:33 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:50:33 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:50:33 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:50:33 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:50:33 | INFO     | healthcare_api | API Request: POST /chats/CEEC9F5AC/messages - Status: 503 - Duration: 0.49s
+2026-02-01 08:52:04 | INFO     | healthcare_api | 🛑 Application shutdown - MongoDB connection closed
+2026-02-01 08:52:08 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:52:13 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:53:30 | ERROR    | healthcare_api | HTTP 401: Could not validate credentials
+2026-02-01 08:53:30 | ERROR    | healthcare_api | HTTP 401: Could not validate credentials
+2026-02-01 08:53:30 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 401 - Duration: 0.01s
+2026-02-01 08:53:30 | INFO     | healthcare_api | API Request: GET /users/me - Status: 401 - Duration: 0.01s
+2026-02-01 08:53:30 | ERROR    | healthcare_api | HTTP 404: Not Found
+2026-02-01 08:53:30 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:53:32 | INFO     | healthcare_api | API Request: POST /login - Status: 200 - Duration: 0.28s
+2026-02-01 08:53:36 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:53:36 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:53:36 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:53:36 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:53:36 | INFO     | healthcare_api | API Request: POST /chats/ - Status: 503 - Duration: 0.49s
+2026-02-01 08:53:42 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:53:42 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:53:42 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:53:42 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:53:42 | INFO     | healthcare_api | API Request: POST /chats/ - Status: 503 - Duration: 0.21s
+2026-02-01 08:53:54 | INFO     | healthcare_api | API Request: POST /login - Status: 200 - Duration: 0.23s
+2026-02-01 08:53:54 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:53:54 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.01s
+2026-02-01 08:53:54 | ERROR    | healthcare_api | HTTP 404: Not Found
+2026-02-01 08:53:54 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:53:56 | INFO     | healthcare_api | API Request: GET /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:54:00 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:54:00 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:54:00 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    agent = cls.get_agent()
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+    raise ServiceError("Failed to initialize AI service", details={"error": str(e)})
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:54:00 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:54:00 | INFO     | healthcare_api | API Request: POST /chats/C6432BA91/messages - Status: 503 - Duration: 0.22s
+2026-02-01 08:55:52 | INFO     | healthcare_api | 🚀 Application started - MongoDB connected
+2026-02-01 08:56:02 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:56:02 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:56:02 | ERROR    | healthcare_api | HTTP 404: Not Found
+2026-02-01 08:56:02 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:56:08 | INFO     | healthcare_api | API Request: GET /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:56:12 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:56:12 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:56:12 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    tool_limiter.increment_call(session_id)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:56:12 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:56:12 | INFO     | healthcare_api | API Request: POST /chats/C6432BA91/messages - Status: 503 - Duration: 0.21s
+2026-02-01 08:56:24 | INFO     | healthcare_api | API Request: POST /login - Status: 200 - Duration: 0.22s
+2026-02-01 08:56:24 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:56:24 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:56:24 | ERROR    | healthcare_api | HTTP 404: Not Found
+2026-02-01 08:56:24 | INFO     | healthcare_api | API Request: GET /documents/user/me - Status: 404 - Duration: 0.00s
+2026-02-01 08:56:29 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:56:29 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:56:29 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    tool_limiter.increment_call(session_id)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:56:29 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:56:29 | INFO     | healthcare_api | API Request: POST /chats/ - Status: 503 - Duration: 0.20s
+2026-02-01 08:56:32 | INFO     | healthcare_api | API Request: GET /chats/C6432BA91 - Status: 200 - Duration: 0.00s
+2026-02-01 08:56:52 | INFO     | healthcare_api | Enhanced query for user U8804E6CC, emergency=False, sensitive=False
+2026-02-01 08:56:52 | ERROR    | healthcare_api | Failed to initialize agent: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+2026-02-01 08:56:52 | ERROR    | healthcare_api | Error in get response: Failed to initialize AI service
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 36, in get_agent
+    cls._agent = Agent(
+                 ^^^^^^
+TypeError: Agent.__init__() got an unexpected keyword argument 'show_tool_calls'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 208, in get_response
+    tool_limiter.increment_call(session_id)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\bhanu\Desktop\health-chatbot\healthcare-api\app\services\agent_service.py", line 60, in get_agent
+app.exceptions.ServiceError: Failed to initialize AI service
+2026-02-01 08:56:52 | ERROR    | healthcare_api | AppException: Failed to generate response
+2026-02-01 08:56:52 | INFO     | healthcare_api | API Request: POST /chats/C6432BA91/messages - Status: 503 - Duration: 0.22s
+2026-02-01 08:57:57 | INFO     | healthcare_api | API Request: GET /chats/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:57:57 | INFO     | healthcare_api | API Request: GET /users/me - Status: 200 - Duration: 0.00s
+2026-02-01 08:57:57 | INFO     | healthcare_api | API Request: OPTIONS /documents/ - Status: 200 - Duration: 0.00s
+2026-02-01 08:57:57 | INFO     | healthcare_api | API Request: GET /documents/ - Status: 200 - Duration: 0.01s
