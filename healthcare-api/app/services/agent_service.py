@@ -2,7 +2,7 @@
 import os
 from typing import AsyncIterator
 from agno.agent import Agent
-from agno.models.google import Gemini
+from agno.models.openrouter import OpenRouter
 from agno.db.mongo import MongoDb
 from agno.tools.duckduckgo import DuckDuckGoTools
 from app.utils.tools import get_patient_info, get_patient_reports, get_latest_report
@@ -20,21 +20,21 @@ class HealthcareAgentService:
     @classmethod
     def get_agent(cls):
         if cls._agent is None:
-            api_key = os.getenv("GOOGLE_API_KEY")
+            api_key = os.getenv("OPENROUTER_API_KEY")
             if not api_key:
-                raise ValueError("GOOGLE_API_KEY not set")
+                raise ValueError("OPENROUTER_API_KEY not set")
             
             try:
                 # MongoDB for session & memory persistence
                 db = MongoDb(
-                    db_url=os.getenv("MONGODB_URI", "mongodb://localhost:27017"),
+                    db_url=os.getenv("MONGODB_URL", "mongodb://mongo:27017"),
                     db_name="healthcare_db",
                     session_collection="agent_sessions",
                 )
                 
                 cls._agent = Agent(
                     name="Health Consultant",
-                    model=Gemini(id="gemini-2.0-flash", api_key=api_key),
+                    model=OpenRouter(id="google/gemini-2.0-flash-001", api_key=api_key),
                     tools=[
                         get_patient_info, 
                         get_patient_reports, 
@@ -50,7 +50,7 @@ class HealthcareAgentService:
                     markdown=True,
                 )
                 
-                info("Healthcare agent initialized successfully")
+                info("Healthcare agent initialized successfully with OpenRouter")
             except Exception as e:
                 log_error(f"Failed to initialize agent: {str(e)}", exc_info=True)
                 raise ServiceError("Failed to initialize AI service", details={"error": str(e)})

@@ -750,3 +750,5 @@ app.exceptions.ServiceError: Failed to initialize AI service
 2026-02-01 08:57:57 | INFO     | healthcare_api | info:144 | API Request: GET /users/me - Status: 200 - Duration: 0.00s
 2026-02-01 08:57:57 | INFO     | healthcare_api | info:144 | API Request: OPTIONS /documents/ - Status: 200 - Duration: 0.00s
 2026-02-01 08:57:57 | INFO     | healthcare_api | info:144 | API Request: GET /documents/ - Status: 200 - Duration: 0.01s
+2026-02-01 09:41:15 | INFO     | healthcare_api | info:144 | 🛑 Application shutdown - MongoDB connection closed
+2026-02-01 09:41:22 | INFO     | healthcare_api | info:144 | 🚀 Application started - MongoDB connected

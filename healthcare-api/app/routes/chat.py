@@ -59,7 +59,7 @@ async def get_chat(chat_id: str, current_user: UserResponse = Depends(get_curren
     return Chat(**chat)
 
 
-@router.post("/", response_model=ChatResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=Chat, status_code=status.HTTP_201_CREATED)
 async def create_chat(
     chat_create: ChatCreate, current_user: UserResponse = Depends(get_current_user)
 ):
@@ -98,7 +98,7 @@ async def create_chat(
         updated_at=datetime.now(),
     )
     chats_collection.insert_one(chat.model_dump())
-    return ChatResponse(**chat.model_dump())
+    return chat
 
 
 @router.post("/{chat_id}/messages", response_model=Message)

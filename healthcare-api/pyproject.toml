@@ -12,6 +12,7 @@ dependencies = [
     "python-multipart==0.0.6",
     "python-dotenv==1.0.0",
     "agno>=2.4.0",
+    "ollama>=0.4.7",
     "chromadb>=0.4.22",
     "bcrypt>=4.0.1,<5.0.0",
     "passlib[bcrypt]>=1.7.4",

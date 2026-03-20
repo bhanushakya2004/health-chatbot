@@ -1,9 +1,9 @@
 import os
 from typing import List, Dict, Optional
 from agno.agent import Agent
-from agno.models.google import Gemini
-from app.config.database import get_chats_collection, get_documents_collection, get_reports_collection
 from agno.models.openrouter import OpenRouter
+from app.config.database import get_chats_collection, get_documents_collection, get_reports_collection
+
 class HealthReportAgent:
     """Agent for generating comprehensive health summaries from user data"""
     
@@ -16,7 +16,7 @@ class HealthReportAgent:
         
         agent = Agent(
             name="Health Report Analyzer",
-            model=OpenRouter(id="google/gemma-3-27b-it"),
+            model=OpenRouter(id="google/gemini-2.0-flash-001", api_key=api_key),
             instructions=[
                 "You are a medical data analyst specialized in creating comprehensive health summaries.",
                 "Analyze patient chat history, medical documents, and reports to extract key health information.",
