@@ -57,12 +57,11 @@ export function Sidebar({
         </Button>
       </div>
 
-      {/* New Chat Button */}
       <div className="px-3">
         <Button
           onClick={onNewChat}
           className={cn(
-            'w-full justify-start gap-2 rounded-lg',
+            'w-full justify-start gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-100',
             isCollapsed && 'justify-center px-0'
           )}
         >

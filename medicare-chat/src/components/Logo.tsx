@@ -7,11 +7,11 @@ interface LogoProps {
 export function Logo({ collapsed }: LogoProps) {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary">
-        <Heart className="h-5 w-5 text-primary-foreground" fill="currentColor" />
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 shadow-md shadow-blue-200">
+        <Heart className="h-6 w-6 text-white" fill="currentColor" />
       </div>
       {!collapsed && (
-        <span className="text-lg font-semibold tracking-tight">MediHelp</span>
+        <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Medi<span className="text-blue-600">Help</span></span>
       )}
     </div>
   );

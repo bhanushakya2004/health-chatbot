@@ -16,7 +16,14 @@ class HealthReportAgent:
         
         agent = Agent(
             name="Health Report Analyzer",
-            model=OpenRouter(id="google/gemini-2.0-flash-001", api_key=api_key),
+            model=OpenRouter(
+                id="google/gemini-2.0-flash-001", 
+                api_key=api_key,
+                extra_headers={
+                    "HTTP-Referer": "https://localhost:8000",
+                    "X-Title": "MediHelp Healthcare"
+                }
+            ),
             instructions=[
                 "You are a medical data analyst specialized in creating comprehensive health summaries.",
                 "Analyze patient chat history, medical documents, and reports to extract key health information.",

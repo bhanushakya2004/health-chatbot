@@ -313,8 +313,8 @@ export function ProfileModal({ open, onClose }: ProfileModalProps) {
                               {doc.processed ? (
                                 <>
                                   <span>•</span>
-                                  <CheckCircle className="h-3 w-3 text-green-600" />
-                                  <span className="text-green-600">Processed</span>
+                                  <CheckCircle className="h-3 w-3 text-blue-600" />
+                                  <span className="text-blue-600">Processed</span>
                                 </>
                               ) : (
                                 <>

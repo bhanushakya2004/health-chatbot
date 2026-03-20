@@ -31,7 +31,7 @@ export const chatService = {
     onComplete?: () => void,
     onError?: (error: Error) => void
   ): Promise<void> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     if (!token) {
       throw new Error('No authentication token found');
     }

@@ -22,8 +22,8 @@ export function ChatHistoryItem({ chat, isActive, onClick, onDelete }: ChatHisto
       className={cn(
         'group flex items-center gap-2 rounded-lg px-3 py-2.5 cursor-pointer transition-smooth',
         isActive
-          ? 'bg-accent text-accent-foreground'
-          : 'hover:bg-muted text-muted-foreground hover:text-foreground'
+          ? 'bg-blue-600 text-white shadow-sm shadow-blue-200'
+          : 'hover:bg-blue-50 text-slate-600 hover:text-blue-700'
       )}
       onClick={onClick}
     >

@@ -161,7 +161,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
               className={cn(
                 'h-8 w-8 rounded-lg transition-smooth',
                 message.trim() || attachments.length > 0
-                  ? 'bg-primary hover:bg-primary/90'
+                  ? 'bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-200 text-white'
                   : 'bg-muted text-muted-foreground'
               )}
               onClick={handleSend}

@@ -34,7 +34,14 @@ class HealthcareAgentService:
                 
                 cls._agent = Agent(
                     name="Health Consultant",
-                    model=OpenRouter(id="google/gemini-2.0-flash-001", api_key=api_key),
+                    model=OpenRouter(
+                        id="google/gemini-2.0-flash-001", 
+                        api_key=api_key,
+                        extra_headers={
+                            "HTTP-Referer": "https://localhost:8000",
+                            "X-Title": "MediHelp Healthcare"
+                        }
+                    ),
                     tools=[
                         get_patient_info, 
                         get_patient_reports, 

@@ -2,125 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* MediHelp Design System - Healthcare-focused, calm, trustworthy */
+/* MediHelp Design System - Pure White & Medical Blue */
 
 @layer base {
-  :root {
-    /* Core backgrounds - warm whites */
-    --background: 0 0% 98%;
-    --foreground: 200 15% 15%;
+  :root, .dark {
+    /* Pure White Backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
-    /* Cards and surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 200 15% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 200 15% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Primary - Healthcare teal */
-    --primary: 168 76% 36%;
+    /* Royal Medical Blue */
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Soft gray-blue */
-    --secondary: 200 20% 94%;
-    --secondary-foreground: 200 15% 25%;
+    /* Very Soft Blue/Slate for secondary elements */
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 222 47% 11%;
 
     /* Muted surfaces */
-    --muted: 200 15% 95%;
-    --muted-foreground: 200 10% 45%;
+    --muted: 210 40% 97%;
+    --muted-foreground: 215 16% 47%;
 
-    /* Accent - Light teal */
-    --accent: 168 50% 92%;
-    --accent-foreground: 168 76% 28%;
+    /* Accent - Sky Blue */
+    --accent: 210 100% 97%;
+    --accent-foreground: 221 83% 45%;
 
     /* Destructive */
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders and inputs */
-    --border: 200 15% 88%;
-    --input: 200 15% 88%;
-    --ring: 168 76% 36%;
+    /* Borders and inputs - soft blue tint */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
 
     --radius: 0.75rem;
 
-    /* Sidebar - slightly darker */
-    --sidebar-background: 200 15% 96%;
-    --sidebar-foreground: 200 15% 25%;
-    --sidebar-primary: 168 76% 36%;
+    /* Sidebar - Light Version */
+    --sidebar-background: 210 40% 99%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 221 83% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 168 50% 92%;
-    --sidebar-accent-foreground: 168 76% 28%;
-    --sidebar-border: 200 15% 90%;
-    --sidebar-ring: 168 76% 36%;
+    --sidebar-accent: 210 100% 97%;
+    --sidebar-accent-foreground: 221 83% 45%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 221 83% 53%;
 
-    /* Chat-specific */
-    --chat-user: 168 60% 94%;
-    --chat-user-foreground: 200 15% 15%;
-    --chat-assistant: 0 0% 100%;
-    --chat-assistant-foreground: 200 15% 15%;
-    --chat-system: 200 15% 96%;
-    --chat-system-foreground: 200 10% 40%;
+    /* Chat Bubbles */
+    --chat-user: 221 83% 53%;
+    --chat-user-foreground: 0 0% 100%;
+    --chat-assistant: 210 40% 96%;
+    --chat-assistant-foreground: 222 47% 11%;
+    --chat-system: 210 40% 98%;
+    --chat-system-foreground: 215 16% 47%;
 
     /* Healthcare accent colors */
-    --health-success: 152 60% 42%;
+    --health-success: 152 60% 45%;
     --health-warning: 38 92% 50%;
     --health-info: 199 89% 48%;
-  }
-
-  .dark {
-    /* Dark mode - Charcoal with soft contrast */
-    --background: 220 15% 10%;
-    --foreground: 200 15% 92%;
-
-    --card: 220 15% 13%;
-    --card-foreground: 200 15% 92%;
-
-    --popover: 220 15% 13%;
-    --popover-foreground: 200 15% 92%;
-
-    /* Primary teal - slightly lighter in dark mode */
-    --primary: 168 65% 45%;
-    --primary-foreground: 220 15% 8%;
-
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 200 15% 85%;
-
-    --muted: 220 15% 16%;
-    --muted-foreground: 200 10% 55%;
-
-    --accent: 168 40% 18%;
-    --accent-foreground: 168 65% 60%;
-
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 168 65% 45%;
-
-    /* Sidebar */
-    --sidebar-background: 220 15% 8%;
-    --sidebar-foreground: 200 15% 85%;
-    --sidebar-primary: 168 65% 45%;
-    --sidebar-primary-foreground: 220 15% 8%;
-    --sidebar-accent: 168 40% 18%;
-    --sidebar-accent-foreground: 168 65% 60%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 168 65% 45%;
-
-    /* Chat-specific dark */
-    --chat-user: 168 40% 18%;
-    --chat-user-foreground: 200 15% 92%;
-    --chat-assistant: 220 15% 15%;
-    --chat-assistant-foreground: 200 15% 92%;
-    --chat-system: 220 15% 12%;
-    --chat-system-foreground: 200 10% 55%;
-
-    /* Healthcare accent colors - dark mode */
-    --health-success: 152 50% 50%;
-    --health-warning: 38 85% 55%;
-    --health-info: 199 80% 55%;
   }
 }
 
@@ -136,7 +80,6 @@
 }
 
 @layer utilities {
-  /* Scrollbar styling */
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) transparent;
@@ -156,16 +99,10 @@
     border-radius: 3px;
   }
 
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground));
-  }
-
-  /* Smooth transitions */
   .transition-smooth {
     @apply transition-all duration-200 ease-out;
   }
 
-  /* Glass effect */
   .glass {
     @apply bg-background/80 backdrop-blur-sm;
   }
