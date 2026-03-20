@@ -11,7 +11,7 @@ export function Logo({ collapsed }: LogoProps) {
         <Heart className="h-6 w-6 text-white" fill="currentColor" />
       </div>
       {!collapsed && (
-        <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Medi<span className="text-blue-600">Help</span></span>
+        <span className="text-xl font-bold tracking-tight text-slate-900">Health<span className="text-blue-600">Bot</span></span>
       )}
     </div>
   );

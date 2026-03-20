@@ -31,7 +31,7 @@ export function EmptyState({ onNewChat }: EmptyStateProps) {
           <div className="h-16 w-16 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto shadow-sm">
             <MessageSquarePlus className="h-8 w-8 text-blue-600" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900">Welcome to Medi<span className="text-blue-600">Help</span></h2>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">Welcome to Health<span className="text-blue-600">Bot</span></h2>
           <p className="text-muted-foreground">
             Your AI healthcare assistant is ready to help. Start a conversation to ask questions
             about your health or upload medical reports.

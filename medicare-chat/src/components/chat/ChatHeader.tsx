@@ -37,7 +37,7 @@ export function ChatHeader({
           className="h-9 w-9 rounded-lg"
         >
           <Info className="h-4 w-4" />
-          <span className="sr-only">About MediHelp</span>
+          <span className="sr-only">About HealthBot</span>
         </Button>
         <ThemeToggle />
         <Button
